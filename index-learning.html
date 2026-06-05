@@ -1,0 +1,1088 @@
+
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>Jirayu Nitiruangwetchakul - Portfolio</title> <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <style>
+      /* 1. ตัวแปรสี (CSS Variables) - ข้อดีคือถ้าอยากเปลี่ยนธีมเว็บ เปลี่ยนแค่ตรงนี้จุดเดียวจบ */
+      :root {
+        --primary-color: #2b3d5b; /* สีหลัก (กรมท่า) */
+        --bg-color: #f5f7fa;      /* สีพื้นหลังเว็บ (เทาอ่อนสบายตา) */
+        --card-bg: #ffffff;       /* สีพื้นหลังของกล่องเนื้อหา (ขาว) */
+        --text-dark: #2d3748;     /* สีตัวอักษรหลัก (เทาเข้ม) */
+        --text-light: #718096;    /* สีตัวอักษรรอง (เทาอ่อนลงมา) */
+        --accent-color: #4299e1;  /* สีไฮไลต์ (ฟ้า) */
+        --border-radius: 24px;    /* ความโค้งมนของมุมกล่อง */
+      }
+
+      /* 2. ล้างค่าพื้นฐาน (Reset) */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box; /* คำนวณขนาดกล่องรวมขอบไปด้วย ไม่ให้หน้าเว็บล้น */
+        font-family: "Prompt", sans-serif; /* บังคับให้ข้อความทั้งหมดใช้ฟอนต์ Prompt */
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-dark);
+        line-height: 1.6; /* ระยะห่างระหว่างบรรทัดเพื่อให้อ่านง่าย */
+      }
+
+      /* จัดกล่องเนื้อหาให้อยู่ตรงกลาง และมีความกว้างไม่เกิน 900px */
+      .container {
+        max-width: 900px;
+        margin: 0 auto; 
+        padding: 2rem;
+      }
+
+      /* 3. 🌙 โหมดมืด (Dark Mode) - เมื่อ body มีคลาสนี้ จะสลับสีตัวแปรให้เป็นโทนสว่างบนพื้นดำ */
+      body.dark-mode {
+        --primary-color: #90cdf4;
+        --bg-color: #1a202c;
+        --card-bg: #2d3748;
+        --text-dark: #f7fafc;
+        --text-light: #a0aec0;
+      }
+
+      /* 4. ส่วนหัวเว็บ (Hero Section) */
+      .hero {
+        text-align: center;
+        padding: 4rem 0;
+      }
+      .profile-img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%; /* ตัดรูปเป็นวงกลม */
+        object-fit: cover;
+        border: 4px solid #fff;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1.5rem;
+      }
+      .hero h1 {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+      }
+      .hero h2 {
+        font-size: 1.2rem;
+        color: var(--text-light);
+        font-weight: 400;
+      }
+
+      /* 5. กล่องเนื้อหาทั่วไป (Card) */
+      .section-card {
+        background-color: var(--card-bg);
+        border-radius: var(--border-radius);
+        padding: 2.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+        transition: transform 0.3s ease; /* เตรียมไว้สำหรับทำแอนิเมชันลอยขึ้น */
+      }
+      .section-card:hover {
+        transform: translateY(-5px); /* เมื่อเอาเมาส์ชี้ ให้กล่องขยับขึ้น 5px */
+      }
+      .section-title {
+        font-size: 1.5rem;
+        color: var(--primary-color);
+        margin-bottom: 1.5rem;
+        border-bottom: 2px solid var(--bg-color);
+        padding-bottom: 0.5rem;
+        display: inline-block;
+      }
+
+      /* 6. ป้ายบอกทักษะ (Skill Tags) */
+      .skills-container {
+        display: flex; /* จัดเรียงแบบยืดหยุ่น */
+        flex-wrap: wrap; /* ถ้าล้นบรรทัดให้ปัดลงมา */
+        gap: 10px; /* ระยะห่างระหว่างป้าย */
+      }
+      .skill-tag {
+        background-color: var(--bg-color);
+        color: var(--primary-color);
+        padding: 8px 16px;
+        border-radius: 12px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+      .skill-tag:hover {
+        background-color: var(--primary-color);
+        color: #fff;
+        transform: translateY(-3px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      }
+
+      /* 7. กล่องรายการโปรเจกต์ (Projects) */
+      .project-item { margin-bottom: 2rem; }
+      .project-item:last-child { margin-bottom: 0; }
+      .project-header {
+        display: flex;
+        justify-content: space-between; /* ดันชื่อโปรเจกต์กับภาษาที่ใช้ ให้อยู่คนละฝั่ง */
+        align-items: center;
+        margin-bottom: 0.5rem;
+      }
+      .project-title { font-weight: 600; font-size: 1.1rem; }
+      .project-tech {
+        font-size: 0.85rem;
+        color: var(--accent-color);
+        background: rgba(66, 153, 225, 0.1);
+        padding: 4px 10px;
+        border-radius: 8px;
+      }
+      .project-desc {
+        color: var(--text-light);
+        font-size: 0.95rem;
+        margin-bottom: 0.5rem;
+      }
+      .project-link {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+      .project-link:hover { text-decoration: underline; }
+
+      /* 8. ระบบติดต่อ (Contact Section) แบบฟอร์มซ้าย-ขวา */
+      .contact-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 3rem;
+        justify-content: space-between;
+      }
+      .contact-form-side { flex: 1; min-width: 300px; }
+      .contact-heading {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        display: inline-block;
+        border-bottom: 3px solid #63b3ed;
+        padding-bottom: 5px;
+      }
+      .contact-desc {
+        color: var(--text-light);
+        font-size: 0.95rem;
+        margin-bottom: 2rem;
+        line-height: 1.5;
+      }
+      
+      /* สไตล์ช่องกรอกข้อมูล (มีแค่ขีดเส้นใต้) */
+      .contact-form { display: flex; flex-direction: column; gap: 1.5rem; }
+      .contact-form input {
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid #cbd5e0;
+        padding: 10px 5px;
+        font-size: 1rem;
+        color: var(--text-dark);
+        font-family: "Prompt", sans-serif;
+        transition: all 0.3s ease;
+        outline: none;
+      }
+      .contact-form input:focus { border-bottom: 2px solid #4299e1; } /* ตอนพิมพ์ให้เส้นสีฟ้า */
+      body.dark-mode .contact-form input {
+        border-bottom: 1px solid #4a5568;
+        color: #f7fafc;
+      }
+      
+      /* ปุ่มส่งข้อความ */
+      .btn-send {
+        background: linear-gradient(to right, #63b3ed, #3182ce); /* ไล่สี Gradient */
+        color: white;
+        border: none;
+        padding: 12px;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        margin-top: 1rem;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+      .btn-send:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(49, 130, 206, 0.4);
+      }
+
+      /* กล่อง Info ด้านขวา */
+      .contact-info-side {
+        flex: 0.8;
+        min-width: 250px;
+        background-color: #2d3748; /* พื้นหลังสีเทาเข้ม */
+        padding: 2.5rem;
+        border-radius: 16px;
+        color: #f7fafc;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+      .info-heading {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(to right, #63b3ed, #3182ce);
+        -webkit-background-clip: text; /* ทำให้ตัวอักษรเป็นสี Gradient */
+        -webkit-text-fill-color: transparent;
+      }
+      .info-list {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+      .info-list li {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        font-size: 0.95rem;
+      }
+      .info-icon {
+        font-size: 1.2rem;
+        color: #63b3ed;
+        width: 20px;
+        text-align: center;
+      }
+      .info-list a {
+        color: #f7fafc;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      .info-list a:hover { color: #63b3ed; }
+
+      /* 9. ระบบเส้นเวลา (Timeline - Education) */
+      .timeline {
+        position: relative;
+        padding-left: 40px; /* เว้นที่ทางซ้ายให้เส้นและไอคอน */
+        margin-top: 25px;
+      }
+      /* เส้นตรงยาว */
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 14px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background-color: rgba(66, 153, 225, 0.3);
+      }
+      .timeline-item { position: relative; margin-bottom: 2rem; }
+      .timeline-item:last-child { margin-bottom: 0; }
+      /* จุดกลมๆ ใส่ไอคอน */
+      .timeline-dot {
+        position: absolute;
+        left: -40px;
+        top: 0;
+        width: 30px;
+        height: 30px;
+        background-color: var(--primary-color);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 0.8rem;
+        box-shadow: 0 0 0 5px var(--card-bg), 0 3px 8px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        z-index: 1; /* ให้อยู่ทับบนเส้นตรง */
+      }
+      .timeline-content {
+        background: var(--bg-color);
+        padding: 1.5rem;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        border-left: 4px solid transparent;
+      }
+      /* ลูกเล่นตอนเอาเมาส์ชี้ Timeline */
+      .timeline-item:hover .timeline-dot {
+        transform: scale(1.2) rotate(360deg); /* ขยายและหมุนไอคอน */
+        background-color: var(--accent-color);
+      }
+      .timeline-item:hover .timeline-content {
+        transform: translateX(8px); /* ขยับกล่องไปทางขวา */
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+        border-left: 4px solid var(--accent-color); /* โชว์แถบสีซ้ายมือ */
+      }
+      .timeline-content h4 {
+        color: var(--primary-color);
+        margin-bottom: 5px;
+        font-size: 1.1rem;
+      }
+      .timeline-date {
+        color: var(--accent-color);
+        font-size: 0.85rem;
+        font-weight: 500;
+        margin-bottom: 12px;
+        display: inline-block;
+        background: rgba(66, 153, 225, 0.1);
+        padding: 4px 12px;
+        border-radius: 20px;
+      }
+      .timeline-content p:last-child {
+        color: var(--text-light);
+        font-size: 0.95rem;
+        margin: 0;
+      }
+      body.dark-mode .timeline-dot {
+        box-shadow: 0 0 0 5px var(--card-bg), 0 3px 8px rgba(0, 0, 0, 0.5);
+      }
+
+      /* 10. สไตล์กลุ่มปุ่มกด (เช่น ปุ่มติดต่อ, GitHub) */
+      .action-buttons {
+        display: flex; gap: 15px; margin-top: 25px; flex-wrap: wrap;
+      }
+      .btn {
+        padding: 10px 22px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.95rem;
+        display: inline-flex; align-items: center; gap: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: none;
+        font-family: "Prompt", sans-serif;
+      }
+      .btn-primary { background-color: var(--primary-color); color: #ffffff; }
+      .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); }
+      .btn-secondary { background-color: #24292e; color: #ffffff; }
+      .btn-secondary:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(36, 41, 46, 0.3); }
+      .btn-outline {
+        background-color: transparent;
+        color: var(--primary-color);
+        border: 2px solid var(--primary-color);
+      }
+      .btn-outline:hover {
+        background-color: var(--primary-color);
+        color: #ffffff;
+        transform: translateY(-3px);
+      }
+      body.dark-mode .btn-secondary { background-color: #ffffff; color: #24292e; }
+
+      /* 11. Modal (ป๊อปอัพโชว์รูป Resume) */
+      .modal {
+        display: none; /* ซ่อนไว้ก่อน จะโชว์เมื่อใช้ JS สั่ง */
+        position: fixed;
+        z-index: 9999;
+        padding-top: 5vh;
+        left: 0; top: 0; width: 100%; height: 100%;
+        -webkit-backdrop-filter: blur(5px);
+        backdrop-filter: blur(5px); /* พื้นหลังเบลอ */
+        overflow: auto;
+      }
+      .modal-content {
+        margin: auto;
+        display: block;
+        max-width: 90%;
+        max-height: 90vh;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        animation: zoomIn 0.3s ease;
+        cursor: zoom-in; /* เมาส์เป็นรูปแว่นขยาย */
+        transition: all 0.3s ease;
+      }
+      .modal-content.zoomed {
+        max-width: 150%; /* ขยายรูปเมื่อคลิก */
+        max-height: none;
+        cursor: zoom-out;
+        margin-bottom: 50px;
+      }
+      @keyframes zoomIn {
+        from { transform: scale(0.9); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+      }
+      .close-modal {
+        position: absolute;
+        top: 20px; right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .close-modal:hover { color: var(--accent-color); }
+
+      /* 12. เลื่อนหน้าจอแบบนุ่มนวล */
+      html { scroll-behavior: smooth; }
+
+      /* 13. แถบเมนูด้านบน (Tab Bar) */
+      .nav-bar {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%); /* วางตรงกลาง */
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px); /* เบลอพื้นหลังหลังเมนู */
+        padding: 8px 16px;
+        border-radius: 50px;
+        display: flex; gap: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        z-index: 1000;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+      }
+      body.dark-mode .nav-bar {
+        background: rgba(45, 55, 72, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .nav-link {
+        text-decoration: none;
+        color: var(--text-light);
+        font-weight: 500;
+        font-size: 0.95rem;
+        padding: 8px 20px;
+        border-radius: 30px;
+        transition: all 0.3s ease;
+      }
+      .nav-link:hover, .nav-link.active {
+        background: var(--primary-color);
+        color: #ffffff;
+      }
+      body.dark-mode .nav-link.active { color: #1a202c; }
+
+      /* 14. ปุ่มลอยมุมจอ (สลับภาษา และ โหมดมืด) */
+      .lang-toggle {
+        position: fixed; top: 20px; right: 75px;
+        background: var(--card-bg);
+        color: var(--primary-color);
+        border: none; border-radius: 50%;
+        width: 45px; height: 45px;
+        font-size: 1rem; font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        z-index: 1000;
+        font-family: "Prompt", sans-serif;
+      }
+      .lang-toggle:hover { transform: scale(1.1); }
+      body.dark-mode .lang-toggle { color: var(--text-dark); }
+
+      .theme-toggle {
+        position: fixed; top: 20px; right: 20px;
+        background: var(--card-bg);
+        color: var(--text-dark);
+        border: none; border-radius: 50%;
+        width: 45px; height: 45px;
+        font-size: 1.2rem; cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        z-index: 1000;
+      }
+      .theme-toggle:hover { transform: scale(1.1); }
+
+      /* 15. แอนิเมชันลอยขึ้นเวลาไถจอ (Scroll Reveal) */
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px); /* เริ่มต้นให้จมลงไปก่อน */
+        transition: all 0.8s ease-out;
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0); /* ดันกลับขึ้นมาที่เดิม */
+      }
+
+      /* 16. เคอร์เซอร์กะพริบสำหรับพิมพ์ดีด */
+      .typing-cursor {
+        display: inline-block;
+        width: 3px; height: 1.2em;
+        background-color: var(--primary-color);
+        vertical-align: middle;
+        animation: blink 0.8s step-end infinite;
+      }
+      @keyframes blink { 50% { opacity: 0; } }
+
+      /* 17. ซ่อนภาษาตามคลาสของ Body (ระบบ Bilingual 2 ภาษา) */
+      body.lang-th .text-en { display: none !important; }
+      body.lang-en .text-th { display: none !important; }
+
+      /* 18. แจ้งเตือนการส่งฟอร์ม (Success/Error Alerts) */
+      .form-alert {
+        font-weight: 500; margin-bottom: 15px; padding: 10px;
+        border-radius: 8px; display: none;
+      }
+      .form-success { color: #48bb78; background: rgba(72, 187, 120, 0.1); }
+      .form-error { color: #f56565; }
+
+      /* 19. Responsive มือถือ/แท็บเล็ต */
+      @media (max-width: 768px) {
+        .contact-container { flex-direction: column; gap: 2rem; }
+      }
+      @media (max-width: 600px) {
+        .container { padding: 1rem; }
+        .section-card { padding: 1.5rem; }
+        .project-header { flex-direction: column; align-items: flex-start; gap: 5px; }
+        .nav-bar {
+          top: auto; bottom: 20px; /* ย้ายเมนูลงล่างสำหรับมือถือ */
+          width: 90%; justify-content: space-around;
+          padding: 10px; border-radius: 20px;
+        }
+        .nav-link { font-size: 0.85rem; padding: 8px 12px; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="nav-bar">
+      <a href="#about" class="nav-link active">
+        <span class="text-th">เกี่ยวกับ</span><span class="text-en">About</span>
+      </a>
+      <a href="#skills" class="nav-link">
+        <span class="text-th">ทักษะ</span><span class="text-en">Skills</span>
+      </a>
+      <a href="#education" class="nav-link">
+        <span class="text-th">การศึกษา</span><span class="text-en">Education</span>
+      </a>
+      <a href="#projects" class="nav-link">
+        <span class="text-th">โครงการ</span><span class="text-en">Projects</span>
+      </a>
+      <a href="#contact" class="nav-link">
+        <span class="text-th">ติดต่อ</span><span class="text-en">Contact</span>
+      </a>
+    </nav>
+
+    <div class="container">
+      <div class="container" id="about">
+        <header class="hero">
+          <img src="profile.jpg" alt="Jirayu Profile" class="profile-img" />
+          <h1>
+            <span class="text-th">จิรายุ นิติเรืองเวชกุล</span>
+            <span class="text-en">Jirayu Nitiruangwetchakul</span>
+          </h1>
+          <h2>
+            <span id="typewriter"></span><span class="typing-cursor"></span>
+          </h2>
+        </header>
+        <section class="section-card reveal">
+          <h3 class="section-title">
+            <span class="text-th">เกี่ยวกับฉัน</span><span class="text-en">About</span>
+          </h3>
+          <p>
+            <span class="text-th"
+              >นักศึกษาสาขาเทคโนโลยีดิจิทัลและนวัตกรรมที่มีความหลงใหลในการพัฒนาแอปพลิเคชันและเว็บไซต์
+              (Frontend และ Backend) มุ่งเน้นการออกแบบ User Interface ที่สะอาดตา
+              ใช้งานง่าย และตอบโจทย์ผู้ใช้จริง มีประสบการณ์จากการทําโครงงานในมหาวิทยาลัย
+              พร้อมนําความรู้มาประยุกต์ใช้และต่อยอดในการฝึกงาน เป็นคนกระตือรือร้น รักการเรียนรู้เทคโนโลยีใหม่ ๆ
+              และพร้อมรับมือกับความท้าทายเพื่อพัฒนาศักยภาพของตนเองอย่างต่อเนื่อง</span
+            >
+            <span class="text-en"
+              >A Digital Technology and Innovation student passionate about web
+              and mobile application development (Frontend & Backend). I focus
+              on designing clean, minimalist, and user-friendly interfaces. With
+              hands-on experience from university projects, I am eager to apply
+              my skills in a professional internship. I am highly motivated,
+              love exploring new IT technologies, and am ready to embrace
+              challenges for continuous growth.</span
+            >
+          </p>
+          <div class="action-buttons">
+            <a href="#contact" class="btn btn-primary">
+              <i class="fa-solid fa-envelope"></i>
+              <span class="text-th">ติดต่อ</span><span class="text-en">Contact</span>
+            </a>
+            <a href="https://github.com/COPTER-11" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+              <i class="fa-brands fa-github"></i> GitHub
+            </a>
+            <button onclick="openResume()" class="btn btn-outline">
+              <i class="fa-solid fa-file-lines"></i> Resume
+            </button>
+          </div>
+        </section>
+      </div>
+
+      <section class="section-card reveal" id="skills">
+        <h3 class="section-title">
+          <span class="text-th">ทักษะและเทคโนโลยี</span><span class="text-en">Skills & Technologies</span>
+        </h3>
+        <div class="skills-container">
+          <span class="skill-tag">Flutter</span>
+          <span class="skill-tag">Dart</span>
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">HTML/CSS</span>
+          <span class="skill-tag">Java</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">PHP</span>
+          <span class="skill-tag">C / C++ / C#</span>
+          <span class="skill-tag">MySQL</span>
+          <span class="skill-tag">UI/UX Design</span>
+        </div>
+      </section>
+
+      <section class="section-card reveal" id="education">
+        <h3 class="section-title">
+          <span class="text-th">การศึกษา</span><span class="text-en">Education</span>
+        </h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"><i class="fa-solid fa-graduation-cap"></i></div>
+            <div class="timeline-content">
+              <h4>
+                <span class="text-th">มหาวิทยาลัยเอเชียอาคเนย์ (SAU)</span>
+                <span class="text-en">Southeast Asia University (SAU)</span>
+              </h4>
+              <span class="timeline-date">
+                <span class="text-th">ปัจจุบัน (กำลังศึกษา)</span><span class="text-en">Currently studying</span>
+              </span>
+              <p>
+                <span class="text-th">ปริญญาตรี คณะศิลปศาสตร์และวิทยาศาสตร์ | สาขาเทคโนโลยีดิจิทัลและนวัตกรรม</span>
+                <span class="text-en">Bachelor's Degree, Faculty of Arts and Sciences | Major in Digital Technology and Innovation</span>
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"><i class="fa-solid fa-certificate"></i></div>
+            <div class="timeline-content">
+              <h4>
+                <span class="text-th">วิทยาลัยเทคโนโลยีการจัดการเพชรเกษม (PM-TECH)</span>
+                <span class="text-en">Phetkasem Management Technological College (PM-TECH)</span>
+              </h4>
+              <span class="timeline-date">
+                <span class="text-th">สำเร็จการศึกษา</span><span class="text-en">Graduated</span>
+              </span>
+              <p>
+                <span class="text-th">ระดับประกาศนียบัตรวิชาชีพชั้นสูง (ปวส.) | สาขาเทคโนโลยีสารสนเทศ</span>
+                <span class="text-en">High Vocational Certificate | Major in Information Technology</span>
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"><i class="fa-solid fa-award"></i></div>
+            <div class="timeline-content">
+              <h4>
+                <span class="text-th">วิทยาลัยเทคโนโลยีการจัดการเพชรเกษม (PM-TECH)</span>
+                <span class="text-en">Phetkasem Management Technological College (PM-TECH)</span>
+              </h4>
+              <span class="timeline-date">
+                <span class="text-th">สำเร็จการศึกษา</span><span class="text-en">Graduated</span>
+              </span>
+              <p>
+                <span class="text-th">ระดับประกาศนียบัตรวิชาชีพ (ปวช.) | สาขาคอมพิวเตอร์ธุรกิจ</span>
+                <span class="text-en">Vocational Certificate | Major in Business Computing</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-card reveal" id="projects">
+        <h3 class="section-title">
+          <span class="text-th">โครงการที่ผ่านมา</span><span class="text-en">Academic Projects</span>
+        </h3>
+
+        <div class="project-item">
+          <div class="project-header">
+            <div class="project-title">Thai Emergency Hotline App</div>
+            <div class="project-tech">Flutter, Dart</div>
+          </div>
+          <ul class="project-desc" style="padding-left: 20px">
+            <li>
+              <span class="text-th">พัฒนาแอปฯ รวบรวมเบอร์สายด่วน เน้นการออกแบบ UI เพื่อให้เข้าถึงข้อมูลฉุกเฉินได้รวดเร็ว</span>
+              <span class="text-en">Developed an app that aggregates emergency hotline numbers, focusing on intuitive UI design for quick access.</span>
+            </li>
+            <li>
+              <span class="text-th">จัดการโครงสร้างหน้าจอด้วย ListView, SliverAppBar และ NavigationBar เพื่อประสบการณ์การใช้งานที่ลื่นไหล</span>
+              <span class="text-en">Managed screen layouts using ListView, SliverAppBar, and NavigationBar to provide a smooth user experience.</span>
+            </li>
+          </ul>
+          <a href="https://github.com/COPTER-11/flutter_thai_hotline_app" target="_blank" rel="noopener noreferrer" class="project-link">
+            <span class="text-th">ดูบน GitHub →</span><span class="text-en">View on GitHub →</span>
+          </a>
+        </div>
+
+        <div class="project-item">
+          <div class="project-header">
+            <div class="project-title">Personal Expense Tracking App</div>
+            <div class="project-tech">React Native, JavaScript</div>
+          </div>
+          <ul class="project-desc" style="padding-left: 20px">
+            <li>
+              <span class="text-th">สร้างแอปฯ จัดการรายรับ-รายจ่าย พร้อมออกแบบ Dashboard สรุปยอดทางการเงินที่เข้าใจง่ายและเป็นมิตรต่อผู้ใช้งาน</span>
+              <span class="text-en">Built an income and expense tracking app with a user-friendly dashboard summarizing financial data.</span>
+            </li>
+            <li>
+              <span class="text-th">จัดการ State และ Local Storage เพื่อบันทึก คำนวณ และเรียกดูประวัติการทํารายการได้อย่างแม่นยำ</span>
+              <span class="text-en">Implemented State management and Local Storage for precise recording, calculation, and retrieval of transaction history.</span>
+            </li>
+          </ul>
+          <a href="https://github.com/COPTER-11/rn-money-tracking-app" target="_blank" rel="noopener noreferrer" class="project-link">
+            <span class="text-th">ดูบน GitHub →</span><span class="text-en">View on GitHub →</span>
+          </a>
+        </div>
+
+        <div class="project-item">
+          <div class="project-header">
+            <div class="project-title">Top Bangkok Cafe Directory App</div>
+            <div class="project-tech">React Native, JavaScript</div>
+          </div>
+          <ul class="project-desc" style="padding-left: 20px">
+            <li>
+              <span class="text-th">พัฒนาแอปฯ แนะนําร้านกาแฟ เน้นการจัดวาง UI (List Rendering) แสดงรูปภาพและรายละเอียดร้านให้ดูทันสมัย</span>
+              <span class="text-en">Developed a cafe recommendation app in Bangkok, emphasizing modern UI layout (List Rendering) for images and details.</span>
+            </li>
+            <li>
+              <span class="text-th">พัฒนาระบบ Navigation ให้สามารถเปลี่ยนหน้าจอระหว่างฟีดหลักและโปรไฟล์ร้านได้อย่างสมูท</span>
+              <span class="text-en">Integrated a Navigation system for seamless transitions between the main feed and cafe profiles.</span>
+            </li>
+          </ul>
+          <a href="https://github.com/COPTER-11/rn-top-bkk-coffee-app" target="_blank" rel="noopener noreferrer" class="project-link">
+            <span class="text-th">ดูบน GitHub →</span><span class="text-en">View on GitHub →</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="section-card reveal" id="contact">
+        <div class="contact-container">
+          <div class="contact-form-side">
+            <h3 class="contact-heading">
+              <span class="text-th">ติดต่อ</span><span class="text-en">Contact Me</span>
+            </h3>
+            <p class="contact-desc">
+              <span class="text-th">หากคุณสนใจหรือมีข้อสงสัยใดๆ สามารถติดต่อผมได้ตลอดเวลาครับ ผมจะรีบตอบกลับให้เร็วที่สุด ขอบคุณครับ</span>
+              <span class="text-en">Feel free to contact me at any time. I will get back to you as soon as possible. Thank you.</span>
+            </p>
+
+            <div id="form-success" class="form-alert form-success">
+              <i class="fa-solid fa-circle-check"></i> 
+              <span class="text-th">ขอบคุณ! ข้อความของคุณถูกส่งแล้ว</span><span class="text-en">Thank you! Your message has been sent.</span>
+            </div>
+
+            <div id="form-error" class="form-alert form-error">
+              <span class="text-th">โอ๊ะ! เกิดปัญหาในการส่งฟอร์มของคุณ</span><span class="text-en">Oops! There was a problem submitting your form.</span>
+            </div>
+
+            <form id="portfolio-form" class="contact-form" action="https://formspree.io/f/xykazzbw" method="POST">
+              <input type="text" name="name" placeholder="Name" required />
+              <input type="email" name="email" placeholder="Email" required />
+              <input type="text" name="message" placeholder="Message" required />
+              <button type="submit" id="submit-btn" class="btn-send">
+                <span class="text-th">ส่งข้อความ</span><span class="text-en">SEND</span>
+              </button>
+            </form>
+          </div>
+
+          <div class="contact-info-side">
+            <h4 class="info-heading">Info</h4>
+            <ul class="info-list">
+              <li><i class="fa-solid fa-envelope info-icon"></i><a href="mailto:ter212548@gmail.com" target="_blank" rel="noopener noreferrer">Email</a></li>
+              <li><i class="fa-solid fa-phone info-icon"></i><a href="tel:0948488606" target="_blank" rel="noopener noreferrer">Phone</a></li>
+              <li><i class="fa-brands fa-facebook info-icon"></i><a href="https://www.facebook.com/share/1BRm7k5rb6/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+              <li><i class="fa-brands fa-instagram info-icon"></i><a href="https://www.instagram.com/copter21_?igsh=MTI3NXA3bzlvbmFqZw==" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+              <li><i class="fa-brands fa-line info-icon"></i><a href="https://line.me/ti/p/6EZuWmLXjZ" target="_blank" rel="noopener noreferrer">Line</a></li>
+              <li><i class="fa-brands fa-github info-icon"></i><a href="https://github.com/COPTER-11" target="_blank" rel="noopener noreferrer">github.com/COPTER-11</a></li>
+              <li><i class="fa-solid fa-clock info-icon"></i><span>09:00 - 18:00</span></li>
+              <li>
+                <i class="fa-solid fa-house info-icon"></i>
+                <a href="https://maps.app.goo.gl/znomLfb7mrY9EMEs6" target="_blank" rel="noopener noreferrer">
+                  <span class="text-th">กรุงเทพมหานคร, ประเทศไทย</span><span class="text-en">Bangkok, Thailand</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <button class="lang-toggle" id="langBtn" onclick="toggleLanguage()">EN</button>
+      <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">🌙</button>
+    </div>
+
+    <div id="resumeModal" class="modal">
+      <span class="close-modal" onclick="closeResume()">×</span>
+      <img class="modal-content" id="resumeImg" src="resume.jpg" alt="Jirayu Resume" />
+    </div>
+
+    <!-- ========================================== -->
+    <!-- ⚙️ ส่วน SCRIPT (JavaScript): ควบคุมลูกเล่นและการทำงานทั้งหมด -->
+    <!-- ========================================== -->
+    <script>
+      // ==========================================
+      // 1. ระบบกำหนดภาษาเริ่มต้น
+      // ==========================================
+      // สั่งให้เบราว์เซอร์เข้าไปที่แท็ก <body> แล้วเพิ่มคลาสชื่อ 'lang-th' เข้าไปทันทีที่โหลดเว็บ
+      // ผลลัพธ์: CSS จะตรวจเจอคลาสนี้และไปสั่งซ่อนข้อความภาษาอังกฤษ ทำให้เว็บเริ่มด้วยภาษาไทย
+      document.body.classList.add("lang-th");
+
+      // ==========================================
+      // 2. ระบบไฮไลต์ Tab Bar เวลาเลื่อนจอ (Scroll Spy)
+      // ==========================================
+      // ค้นหาเนื้อหาทุกก้อนที่มี id (เช่น <section id="skills">) มาเก็บไว้ในตัวแปรแบบอาร์เรย์ (Array) ชื่อ sections
+      const sections = document.querySelectorAll("section[id], .container[id]");
+      // ค้นหาปุ่มลิงก์บนเมนูด้านบนทั้งหมดที่มีคลาส .nav-link มาเก็บไว้ในตัวแปร navLinks
+      const navLinks = document.querySelectorAll(".nav-link");
+
+      // ติดตั้งตัวดักจับเหตุการณ์ (Event Listener) เพื่อรอดูว่าผู้ใช้มีการ "เลื่อนหน้าจอ (scroll)" หรือไม่
+      window.addEventListener("scroll", () => {
+        // สร้างตัวแปรว่างๆ เอาไว้เก็บค่า id ของกล่องเนื้อหาที่กำลังแสดงอยู่ตรงกลางจอ
+        let current = "";
+        
+        // วนลูปเช็กกล่องเนื้อหาทีละกล่อง (จากตัวแปร sections ด้านบน)
+        sections.forEach((section) => {
+          // ดึงค่าระยะห่างจากขอบจอบนสุด จนถึงจุดเริ่มต้นของกล่องนั้นๆ มาเก็บไว้
+          const sectionTop = section.offsetTop;
+          
+          // สูตรคำนวณ: ถ้าระยะการเลื่อนจอ (scrollY) บวกกับ ความกว้างครึ่งจอ (innerHeight / 2) มีค่ามากกว่าขอบบนของกล่อง
+          // แปลว่าผู้ใช้เลื่อนหน้าจอมาจนกล่องนี้อยู่ตรงกึ่งกลางหน้าจอแล้ว
+          if (window.scrollY + window.innerHeight / 2 >= sectionTop) {
+            // ดึงค่าแอตทริบิวต์ "id" ของกล่องนั้น (เช่น 'skills') มาเก็บไว้ในตัวแปร current
+            current = section.getAttribute("id");
+          }
+        });
+
+        // เมื่อรู้แล้วว่าตอนนี้เลื่อนหน้าจอมาอยู่ที่กล่องไหน ให้วนลูปไปที่ปุ่มเมนู (navLinks) ทีละปุ่ม
+        navLinks.forEach((link) => {
+          // สั่งลบคลาส "active" (ที่ทำหน้าที่ระบายสีไฮไลต์) ออกจากปุ่มทุกปุ่มก่อน เพื่อรีเซ็ตสี
+          link.classList.remove("active");
+          
+          // เช็กว่า ลิงก์ปลายทางของปุ่มนั้น (เช่น href="#skills") มีคำตรงกับค่า id ในตัวแปร current หรือไม่
+          if (link.getAttribute("href").includes(current)) {
+            // ถ้าตรงกัน แปลว่าเป็นปุ่มของกล่องเนื้อหานี้ ให้เติมคลาส "active" กลับเข้าไปเพื่อให้ปุ่มสว่างขึ้น
+            link.classList.add("active");
+          }
+        });
+      });
+
+      // ==========================================
+      // 3. ระบบคลิกเมนูแล้วเลื่อนมาตรงกลางจอ (Smooth Center Scroll)
+      // ==========================================
+      // วนลูปหาปุ่มเมนูทั้งหมด
+      document.querySelectorAll(".nav-link").forEach((link) => {
+        // ผูกฟังก์ชันเข้ากับการ "คลิก" ที่ปุ่มนั้นๆ
+        link.addEventListener("click", function (e) {
+          // ดึงค่าลิงก์ปลายทางมาเก็บไว้ (เช่นจะได้คำว่า "#about")
+          const targetHref = this.getAttribute("href");
+          
+          // เช็กให้ชัวร์ว่าลิงก์นี้เริ่มต้นด้วยเครื่องหมาย # (คือการชี้ไปหา id ในหน้าเดียวกัน)
+          if (targetHref.startsWith("#")) {
+            // สำคัญมาก: e.preventDefault() คือคำสั่งบล็อกพฤติกรรมดั้งเดิมของ HTML ไม่ให้มันกระโดดวาร์ปไปแบบแข็งๆ
+            e.preventDefault(); 
+            
+            // ใช้คำสั่ง substring(1) ตัดอักษรตัวแรก (#) ทิ้งไป จะเหลือแค่คำว่า "about"
+            const targetId = targetHref.substring(1);
+            // เอาคำว่า "about" ไปหาแท็กใน HTML ที่มี id ตรงกัน
+            const targetElement = document.getElementById(targetId);
+            
+            // ถ้าค้นหาเจอ
+            if (targetElement) {
+              // สั่งให้กล่องเนื้อหานั้น เลื่อนมาหาเราแบบนุ่มนวล (smooth) และให้จุดโฟกัสมาหยุดที่ตรงกลางจอเป๊ะๆ (center)
+              targetElement.scrollIntoView({
+                behavior: "smooth",
+                block: "center",
+              });
+            }
+          }
+        });
+      });
+
+      // ==========================================
+      // 4. ระบบเปลี่ยนธีม มืด/สว่าง (Dark Mode Toggle)
+      // ==========================================
+      function toggleTheme() {
+        // classList.toggle คือคำสั่งอัจฉริยะ: ถ้าใน <body> ไม่มีคลาส 'dark-mode' มันจะเติมให้ แต่ถ้ามีอยู่แล้ว มันจะลบออก
+        document.body.classList.toggle("dark-mode");
+        // ดึงปุ่มเปลี่ยนธีมมาเตรียมเปลี่ยนไอคอน
+        const btn = document.getElementById("themeBtn");
+        
+        // เช็กว่า ตอนนี้ <body> มีคลาส 'dark-mode' อยู่ไหม
+        if (document.body.classList.contains("dark-mode")) {
+          // ถ้ามี (เป็นโหมดมืดอยู่) ให้เปลี่ยนไอคอนปุ่มเป็นรูปพระอาทิตย์ เพื่อบอกว่ากดแล้วจะสว่าง
+          btn.innerText = "☀️"; 
+        } else {
+          // ถ้าไม่มี (เป็นโหมดสว่าง) ให้เปลี่ยนไอคอนเป็นรูปพระจันทร์
+          btn.innerText = "🌙";
+        }
+      }
+
+      // ==========================================
+      // 5. ระบบสลับภาษา ไทย/อังกฤษ (Language Toggle)
+      // ==========================================
+      function toggleLanguage() {
+        // เก็บแท็ก body และปุ่มกดไว้ในตัวแปร
+        const body = document.body;
+        const langBtn = document.getElementById("langBtn");
+        
+        // เช็กว่า ถ้าปัจจุบันเป็นภาษาไทยอยู่ (มีคลาส lang-th)
+        if (body.classList.contains("lang-th")) {
+          body.classList.remove("lang-th"); // สั่งลบคลาสไทยทิ้ง
+          body.classList.add("lang-en");    // สั่งเติมคลาสอังกฤษเข้าไปแทน (CSS จะทำงานโชว์ข้อความ EN ทันที)
+          langBtn.innerText = "TH";         // เปลี่ยนข้อความบนปุ่มเป็น "TH" เพื่อบอกว่ากดปุ่มนี้เพื่อกลับไปภาษาไทย
+        } else {
+          // ถ้าปัจจุบันเป็นภาษาอังกฤษอยู่ ก็ทำสลับกัน
+          body.classList.remove("lang-en"); // สั่งลบคลาสอังกฤษทิ้ง
+          body.classList.add("lang-th");    // สั่งเติมคลาสไทยเข้าไป
+          langBtn.innerText = "EN";         // เปลี่ยนปุ่มเป็น "EN"
+        }
+      }
+
+      // ==========================================
+      // 6. ระบบเอฟเฟกต์พิมพ์ดีด (Typewriter Effect)
+      // ==========================================
+      // สร้างอาร์เรย์เก็บประโยคที่เราต้องการให้ระบบพิมพ์สลับไปมา
+      const textArray = ["Student Developer", "Frontend Enthusiast", "UI/UX Designer"];
+      let textIndex = 0; // ตัวแปรจำว่า ตอนนี้กำลังพิมพ์ประโยคที่เท่าไหร่ (0 คือประโยคแรก)
+      let charIndex = 0; // ตัวแปรจำว่า ตอนนี้กำลังพิมพ์ตัวอักษรที่เท่าไหร่ของประโยคนั้นๆ
+      let isDeleting = false; // ตัวแปรจำสถานะ (True = กำลังลบทีละตัว, False = กำลังพิมพ์ทีละตัว)
+
+      function typeWriter() {
+        // ดึงประโยคปัจจุบันออกมาจากอาร์เรย์ (เช่นดึงคำว่า "Student Developer")
+        const currentText = textArray[textIndex];
+        
+        // คำสั่ง substring(0, charIndex) คือการตัดตัวอักษรจากตำแหน่งที่ 0 ถึงจำนวนปัจจุบัน 
+        // เช่น รอบแรกได้ "S", รอบสองได้ "St", รอบสามได้ "Stu" (มันเลยดูเหมือนกำลังพิมพ์)
+        let displayString = currentText.substring(0, charIndex);
+        
+        // เอาข้อความที่ตัดแล้ว ไปยัดใส่ในแท็ก <span id="typewriter"> บนหน้า HTML
+        document.getElementById("typewriter").innerText = displayString;
+
+        // ลอจิกควบคุมการทำงาน:
+        // เช็กว่า ถ้า "ไม่ได้กำลังลบ" และ "ตัวอักษรที่พิมพ์ยังไม่ครบทั้งประโยค"
+        if (!isDeleting && charIndex < currentText.length) {
+          charIndex++; // เพิ่มจำนวนตัวอักษรขึ้น 1 ตัว
+          setTimeout(typeWriter, 100); // ตั้งเวลาให้ฟังก์ชันตัวเองทำงานซ้ำในอีก 100 มิลลิวินาที (ความเร็วตอนพิมพ์)
+        
+        // เช็กว่า ถ้า "กำลังลบ" และ "ตัวอักษรยังไม่หมด (ยังมากกว่า 0)"
+        } else if (isDeleting && charIndex > 0) {
+          charIndex--; // ลดจำนวนตัวอักษรลง 1 ตัว
+          setTimeout(typeWriter, 50); // ตั้งเวลาให้ทำงานซ้ำใน 50 มิลลิวินาที (ตอนลบจะเร็วกว่าตอนพิมพ์)
+        
+        // ถ้าเข้าเงื่อนไขนี้ แปลว่าพิมพ์จนสุดคำแล้ว หรือลบจนหมดคำแล้ว
+        } else {
+          isDeleting = !isDeleting; // สลับสถานะ (ถ้าเพิ่งพิมพ์เสร็จ ก็เปลี่ยนเป็นเตรียมลบ)
+          
+          // เช็กว่า ถ้าเพิ่งลบเสร็จ (!isDeleting เป็นจริง)
+          if (!isDeleting) {
+            // ให้เลื่อนไปพิมพ์ประโยคถัดไป 
+            // สูตร (textIndex + 1) % textArray.length จะช่วยให้พอมันไปถึงประโยคสุดท้าย มันจะวนกลับมาประโยคแรก (0) ใหม่
+            textIndex = (textIndex + 1) % textArray.length;
+          }
+          // พักจังหวะ: ถ้าเพิ่งพิมพ์เสร็จ (isDeleting=true) ให้หยุดรอ 2 วินาที (2000) ก่อนเริ่มลบ
+          // แต่ถ้าเพิ่งลบเสร็จ (isDeleting=false) ให้หยุดรอแค่ครึ่งวินาที (500) แล้วเริ่มพิมพ์คำใหม่
+          setTimeout(typeWriter, isDeleting ? 2000 : 500); 
+        }
+      }
+      
+      // เมื่อโครงสร้าง HTML ทั้งหมดบนเว็บถูกโหลดเสร็จแล้ว ให้สั่งเริ่มฟังก์ชันพิมพ์ดีดทันที
+      document.addEventListener("DOMContentLoaded", function () { typeWriter(); });
+
+      // ==========================================
+      // 7. ระบบโชว์แอนิเมชันลอยขึ้นเวลาไถจอ (Scroll Reveal)
+      // ==========================================
+      function revealElement() {
+        // ค้นหาทุกแท็กใน HTML ที่มีคลาส .reveal มาเก็บไว้
+        var reveals = document.querySelectorAll(".reveal");
+        
+        // วนลูปเช็กกล่อง .reveal ทีละอัน
+        for (var i = 0; i < reveals.length; i++) {
+          // หาความสูงของหน้าจอเบราว์เซอร์ปัจจุบัน
+          var windowHeight = window.innerHeight;
+          // หาว่าขอบบนของกล่อง .reveal นั้น อยู่ห่างจากขอบบนของหน้าจอเท่าไหร่
+          var elementTop = reveals[i].getBoundingClientRect().top;
+          // กำหนดจุดทริกเกอร์: ให้ขอบกล่องโผล่พ้นจอล่างขึ้นมา 100 พิกเซลก่อน ถึงจะเริ่มแสดงผล
+          var elementVisible = 100;
+          
+          // ถ้าขอบกล่องเลื่อนทะลุจุดทริกเกอร์ขึ้นมาแล้ว
+          if (elementTop < windowHeight - elementVisible) {
+            // เติมคลาส "active" เข้าไป (CSS จะไปรับช่วงต่อ สั่งให้กล่องเด้งขึ้นและเปลี่ยนโปร่งใสเป็น 100%)
+            reveals[i].classList.add("active");
+          }
+        }
+      }
+      // ผูกฟังก์ชัน revealElement เข้ากับการ "ไถจอ (scroll)"
+      window.addEventListener("scroll", revealElement);
+      // สั่งรันฟังก์ชัน 1 ครั้งตอนเปิดเว็บ เผื่อกล่องแรกมันอยู่บนจอแต่แรกอยู่แล้ว จะได้แสดงผลทันที
+      revealElement(); 
+
+      // ==========================================
+      // 8. ระบบป๊อปอัพโชว์เรซูเม่ (Modal View)
+      // ==========================================
+      // ฟังก์ชันสำหรับเปิด Popup 
+      function openResume() {
+        // ค้นหากล่อง Popup แล้วเปลี่ยน CSS จาก display: none เป็น display: block เพื่อโชว์ขึ้นมา
+        document.getElementById("resumeModal").style.display = "block";
+      }
+      
+      // ค้นหารูปภาพเรซูเม่
+      const resumeImg = document.getElementById("resumeImg");
+      // ถ้ามีรูปนี้อยู่จริง
+      if (resumeImg) {
+        // ผูกฟังก์ชันเมื่อคน "คลิก" ที่รูป
+        resumeImg.addEventListener("click", function (event) {
+          // คำสั่ง stopPropagation คือการบอกเบราว์เซอร์ว่า "ฉันกดที่รูปนะ ห้ามส่งการคลิกทะลุไปโดนพื้นหลังสีดำเด็ดขาด"
+          event.stopPropagation(); 
+          // เพิ่ม/ลบคลาส "zoomed" สลับกันไป (คลาสนี้ CSS สั่งขยายภาพ 150%)
+          this.classList.toggle("zoomed");
+        });
+      }
+      
+      // ฟังก์ชันสำหรับปิด Popup
+      function closeResume() {
+        // ซ่อนกล่อง Popup กลับไปเหมือนเดิม
+        document.getElementById("resumeModal").style.display = "none";
+        // และต้องไม่ลืม รีเซ็ตรูปให้หายซูมด้วย เผื่อเปิดมาครั้งหน้ามันจะได้ขนาดปกติ
+        if (resumeImg) resumeImg.classList.remove("zoomed");
+      }
+      
+      // ฟังก์ชันปิด Popup อัตโนมัติ หากผู้ใช้คลิกพื้นที่สีดำรอบๆ นอกรูป
+      window.onclick = function (event) {
+        var modal = document.getElementById("resumeModal");
+        // ถ้าจุดที่ผู้ใช้คลิก (event.target) คือพื้นหลังสีดำของ Modal
+        if (event.target == modal) {
+          // สั่งซ่อน และรีเซ็ตการซูม
+          modal.style.display = "none";
+          if (resumeImg) resumeImg.classList.remove("zoomed");
+        }
+      };
+
+      // ==========================================
+      // 9. ระบบส่งอีเมล (Fetch API เชื่อมต่อกับ Formspree)
+      // ==========================================
+      // เตรียมตัวแปร ค้นหาฟอร์ม, กล่องแจ้งเตือนสำเร็จ, กล่องแจ้งเตือนมีปัญหา, และปุ่มส่ง
+      const form = document.getElementById("portfolio-form");
+      const successMsg = document.getElementById("form-success");
+      const errorMsg = document.getElementById("form-error");
+      const submitBtn = document.getElementById("submit-btn");
+
+      // เช็กก่อนว่าหน้าเว็บนี้มีฟอร์มอยู่จริงไหม (กัน Error)
+      if (form) {
+        // เมื่อผู้ใช้กดปุ่ม Type="submit" หรือกด Enter ในฟอร์ม
+        form.addEventListener("submit", async function (event) {
+          // สำคัญที่สุด: คำสั่งป้องกันไม่ให้เบราว์เซอร์พาเรากระโดดไปยังหน้าเว็บของ Formspree
+          event.preventDefault(); 
+
+          // 1. ช่วงกำลังส่งข้อมูล: เปลี่ยนข้อความบนปุ่ม และปิดการกดซ้ำ (disabled) เพื่อป้องกันคนกดรัวๆ
+          submitBtn.innerHTML = '<span class="text-th">กำลังส่ง...</span><span class="text-en">SENDING...</span>';
+          submitBtn.disabled = true;
+          // ปิดกล่องแจ้งเตือนเผื่อมันเปิดค้างอยู่จากรอบก่อน
+          successMsg.style.display = "none";
+          errorMsg.style.display = "none";
+
+          // นำข้อมูลที่ผู้ใช้พิมพ์ในช่องทั้งหมดมาแพ็กรวมกันในรูปแบบ FormData
+          const data = new FormData(event.target);
+
+          // คำสั่ง fetch คือการยิงข้อมูลผ่านอินเทอร์เน็ตแบบเบื้องหลัง (Background Ajax)
+          // event.target.action คือลิงก์ปลายทางที่เราเขียนไว้ที่แอตทริบิวต์ action="..."
+          fetch(event.target.action, {
+            method: form.method, // ใช้วิธีส่งตามที่กำหนดไว้ (คือ POST)
+            body: data, // ส่งก้อนข้อมูลที่แพ็กไว้เมื่อกี้ไป
+            headers: { Accept: "application/json" }, // บอก Formspree ว่าเราขอรับผลลัพธ์ตอบกลับมาเป็น JSON
+          })
+            // เมื่อเซิร์ฟเวอร์ปลายทางประมวลผลเสร็จ และตอบกลับมา (.then)
+            .then((response) => {
+              // เช็กว่าสถานะตอบกลับโอเคไหม (ส่งสำเร็จไหม)
+              if (response.ok) {
+                successMsg.style.display = "block"; // ถ้าสำเร็จ ให้โชว์กล่องข้อความสีเขียว
+                form.reset(); // ล้างข้อมูลในช่องกรอกให้กลับมาว่างเปล่า
+              } else {
+                errorMsg.style.display = "block"; // ถ้าไม่สำเร็จ ให้โชว์กล่องสีแดง
+              }
+              // ไม่ว่าจะสำเร็จหรือล้มเหลว ต้องคืนสถานะปุ่มกลับมาให้กดใหม่ได้
+              submitBtn.innerHTML = '<span class="text-th">ส่งข้อความ</span><span class="text-en">SEND</span>';
+              submitBtn.disabled = false;
+            })
+            // ถ้าเกิดปัญหาหนักมาก เช่น เน็ตหลุด เซิร์ฟเวอร์ล่ม เข้ามาที่ .catch
+            .catch((error) => {
+              errorMsg.style.display = "block"; // โชว์กล่องแดงบอกว่าเกิดข้อผิดพลาด
+              // คืนสถานะปุ่ม
+              submitBtn.innerHTML = '<span class="text-th">ส่งข้อความ</span><span class="text-en">SEND</span>';
+              submitBtn.disabled = false;
+            });
+        });
+      }
+    </script>
+  </body>
+</html>

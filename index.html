@@ -4,663 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jirayu Nitiruangwetchakul - Portfolio</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <style>
-      /* CSS Variables สำหรับคุมโทนสี (ดึงโทนสีกรมท่าจากเรซูเม่) */
-      :root {
-        --primary-color: #2b3d5b;
-        --bg-color: #f5f7fa;
-        --card-bg: #ffffff;
-        --text-dark: #2d3748;
-        --text-light: #718096;
-        --accent-color: #4299e1;
-        --border-radius: 24px; /* มุมโค้งมนแบบ Mobile UI */
-      }
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Prompt", sans-serif;
-      }
-
-      body {
-        background-color: var(--bg-color);
-        color: var(--text-dark);
-        line-height: 1.6;
-      }
-
-      .container {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 2rem;
-      }
-
-      /* --- โหมดมืด (Dark Mode) --- */
-      body.dark-mode {
-        --primary-color: #90cdf4;
-        --bg-color: #1a202c;
-        --card-bg: #2d3748;
-        --text-dark: #f7fafc;
-        --text-light: #a0aec0;
-      }
-
-      /* Hero Section */
-      .hero {
-        text-align: center;
-        padding: 4rem 0;
-      }
-
-      .profile-img {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 4px solid #fff;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        margin-bottom: 1.5rem;
-      }
-
-      .hero h1 {
-        font-size: 2.5rem;
-        color: var(--primary-color);
-        margin-bottom: 0.5rem;
-      }
-
-      .hero h2 {
-        font-size: 1.2rem;
-        color: var(--text-light);
-        font-weight: 400;
-      }
-
-      /* Card Layout แบบคลีนๆ */
-      .section-card {
-        background-color: var(--card-bg);
-        border-radius: var(--border-radius);
-        padding: 2.5rem;
-        margin-bottom: 2rem;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-        transition: transform 0.3s ease;
-      }
-
-      .section-card:hover {
-        transform: translateY(-5px);
-      }
-
-      .section-title {
-        font-size: 1.5rem;
-        color: var(--primary-color);
-        margin-bottom: 1.5rem;
-        border-bottom: 2px solid var(--bg-color);
-        padding-bottom: 0.5rem;
-        display: inline-block;
-      }
-
-      /* Skills Tags */
-      .skills-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-
-      .skill-tag {
-        background-color: var(--bg-color);
-        color: var(--primary-color);
-        padding: 8px 16px;
-        border-radius: 12px;
-        font-size: 0.9rem;
-        font-weight: 500;
-        transition: all 0.3s ease;
-      }
-      .skill-tag:hover {
-        background-color: var(--primary-color);
-        color: #fff;
-        transform: translateY(-3px);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-      }
-
-      /* Projects List */
-      .project-item {
-        margin-bottom: 2rem;
-      }
-
-      .project-item:last-child {
-        margin-bottom: 0;
-      }
-
-      .project-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 0.5rem;
-      }
-
-      .project-title {
-        font-weight: 600;
-        font-size: 1.1rem;
-      }
-
-      .project-tech {
-        font-size: 0.85rem;
-        color: var(--accent-color);
-        background: rgba(66, 153, 225, 0.1);
-        padding: 4px 10px;
-        border-radius: 8px;
-      }
-
-      .project-desc {
-        color: var(--text-light);
-        font-size: 0.95rem;
-        margin-bottom: 0.5rem;
-      }
-
-      .project-link {
-        color: var(--primary-color);
-        text-decoration: none;
-        font-size: 0.9rem;
-        font-weight: 500;
-      }
-
-      .project-link:hover {
-        text-decoration: underline;
-      }
-
-      /* --- Contact Section Layout --- */
-      .contact-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 3rem;
-        justify-content: space-between;
-      }
-
-      .contact-form-side {
-        flex: 1;
-        min-width: 300px;
-      }
-
-      .contact-heading {
-        font-size: 2rem;
-        margin-bottom: 1rem;
-        display: inline-block;
-        border-bottom: 3px solid #63b3ed;
-        padding-bottom: 5px;
-      }
-
-      .contact-desc {
-        color: var(--text-light);
-        font-size: 0.95rem;
-        margin-bottom: 2rem;
-        line-height: 1.5;
-      }
-
-      .contact-form {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-      }
-
-      .contact-form input {
-        background: transparent;
-        border: none;
-        border-bottom: 1px solid #cbd5e0;
-        padding: 10px 5px;
-        font-size: 1rem;
-        color: var(--text-dark);
-        font-family: "Prompt", sans-serif;
-        transition: all 0.3s ease;
-        outline: none;
-      }
-
-      .contact-form input:focus {
-        border-bottom: 2px solid #4299e1;
-      }
-
-      body.dark-mode .contact-form input {
-        border-bottom: 1px solid #4a5568;
-        color: #f7fafc;
-      }
-
-      .btn-send {
-        background: linear-gradient(to right, #63b3ed, #3182ce);
-        color: white;
-        border: none;
-        padding: 12px;
-        border-radius: 6px;
-        font-size: 1rem;
-        font-weight: 600;
-        cursor: pointer;
-        margin-top: 1rem;
-        transition: transform 0.3s, box-shadow 0.3s;
-      }
-
-      .btn-send:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 15px rgba(49, 130, 206, 0.4);
-      }
-
-      .contact-info-side {
-        flex: 0.8;
-        min-width: 250px;
-        background-color: #2d3748;
-        padding: 2.5rem;
-        border-radius: 16px;
-        color: #f7fafc;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-      }
-
-      .info-heading {
-        font-size: 2rem;
-        margin-bottom: 1.5rem;
-        background: linear-gradient(to right, #63b3ed, #3182ce);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-
-      .info-list {
-        list-style: none;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 1.2rem;
-      }
-
-      .info-list li {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        font-size: 0.95rem;
-      }
-
-      .info-icon {
-        font-size: 1.2rem;
-        color: #63b3ed;
-        width: 20px;
-        text-align: center;
-      }
-
-      .info-list a {
-        color: #f7fafc;
-        text-decoration: none;
-        transition: color 0.3s;
-      }
-
-      .info-list a:hover {
-        color: #63b3ed;
-      }
-
-      /* --- Timeline (Education) --- */
-      .timeline {
-        position: relative;
-        padding-left: 40px;
-        margin-top: 25px;
-      }
-
-      .timeline::before {
-        content: "";
-        position: absolute;
-        left: 14px;
-        top: 0;
-        bottom: 0;
-        width: 2px;
-        background-color: rgba(66, 153, 225, 0.3);
-      }
-
-      .timeline-item {
-        position: relative;
-        margin-bottom: 2rem;
-      }
-
-      .timeline-item:last-child {
-        margin-bottom: 0;
-      }
-
-      .timeline-dot {
-        position: absolute;
-        left: -40px;
-        top: 0;
-        width: 30px;
-        height: 30px;
-        background-color: var(--primary-color);
-        color: white;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 0.8rem;
-        box-shadow: 0 0 0 5px var(--card-bg), 0 3px 8px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease;
-        z-index: 1;
-      }
-
-      .timeline-content {
-        background: var(--bg-color);
-        padding: 1.5rem;
-        border-radius: 12px;
-        transition: all 0.3s ease;
-        border-left: 4px solid transparent;
-      }
-
-      .timeline-item:hover .timeline-dot {
-        transform: scale(1.2) rotate(360deg);
-        background-color: var(--accent-color);
-      }
-
-      .timeline-item:hover .timeline-content {
-        transform: translateX(8px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
-        border-left: 4px solid var(--accent-color);
-      }
-
-      .timeline-content h4 {
-        color: var(--primary-color);
-        margin-bottom: 5px;
-        font-size: 1.1rem;
-      }
-
-      .timeline-date {
-        color: var(--accent-color);
-        font-size: 0.85rem;
-        font-weight: 500;
-        margin-bottom: 12px;
-        display: inline-block;
-        background: rgba(66, 153, 225, 0.1);
-        padding: 4px 12px;
-        border-radius: 20px;
-      }
-
-      .timeline-content p:last-child {
-        color: var(--text-light);
-        font-size: 0.95rem;
-        margin: 0;
-      }
-
-      body.dark-mode .timeline-dot {
-        box-shadow: 0 0 0 5px var(--card-bg), 0 3px 8px rgba(0, 0, 0, 0.5);
-      }
-
-      /* --- สไตล์ของกลุ่มปุ่มกด --- */
-      .action-buttons {
-        display: flex;
-        gap: 15px;
-        margin-top: 25px;
-        flex-wrap: wrap;
-      }
-
-      .btn {
-        padding: 10px 22px;
-        border-radius: 25px;
-        text-decoration: none;
-        font-weight: 500;
-        font-size: 0.95rem;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        border: none;
-        font-family: "Prompt", sans-serif;
-      }
-
-      .btn-primary {
-        background-color: var(--primary-color);
-        color: #ffffff;
-      }
-      .btn-primary:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-      }
-
-      .btn-secondary {
-        background-color: #24292e;
-        color: #ffffff;
-      }
-      .btn-secondary:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 15px rgba(36, 41, 46, 0.3);
-      }
-
-      .btn-outline {
-        background-color: transparent;
-        color: var(--primary-color);
-        border: 2px solid var(--primary-color);
-      }
-      .btn-outline:hover {
-        background-color: var(--primary-color);
-        color: #ffffff;
-        transform: translateY(-3px);
-      }
-
-      body.dark-mode .btn-secondary {
-        background-color: #ffffff;
-        color: #24292e;
-      }
-
-      /* --- สไตล์ของ Popup (Modal) รูป Resume --- */
-      .modal {
-        display: none;
-        position: fixed;
-        z-index: 9999;
-        padding-top: 5vh;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        -webkit-backdrop-filter: blur(5px);
-        backdrop-filter: blur(5px);
-        overflow: auto;
-      }
-
-      .modal-content {
-        margin: auto;
-        display: block;
-        max-width: 90%;
-        max-height: 90vh;
-        border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        animation: zoomIn 0.3s ease;
-        cursor: zoom-in;
-        transition: all 0.3s ease;
-      }
-
-      .modal-content.zoomed {
-        max-width: 150%;
-        max-height: none;
-        cursor: zoom-out;
-        margin-bottom: 50px;
-      }
-
-      @keyframes zoomIn {
-        from {
-          transform: scale(0.9);
-          opacity: 0;
-        }
-        to {
-          transform: scale(1);
-          opacity: 1;
-        }
-      }
-
-      .close-modal {
-        position: absolute;
-        top: 20px;
-        right: 35px;
-        color: #f1f1f1;
-        font-size: 40px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: 0.3s;
-      }
-
-      .close-modal:hover {
-        color: var(--accent-color);
-      }
-
-      /* --- เลื่อนหน้าจอแบบนุ่มนวล (Smooth Scroll) --- */
-      html {
-        scroll-behavior: smooth;
-      }
-
-      /* --- Tab Bar (Navigation Bar) --- */
-      .nav-bar {
-        position: fixed;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        padding: 8px 16px;
-        border-radius: 50px;
-        display: flex;
-        gap: 10px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        z-index: 1000;
-        border: 1px solid rgba(255, 255, 255, 0.5);
-      }
-
-      body.dark-mode .nav-bar {
-        background: rgba(45, 55, 72, 0.7);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-      }
-
-      .nav-link {
-        text-decoration: none;
-        color: var(--text-light);
-        font-weight: 500;
-        font-size: 0.95rem;
-        padding: 8px 20px;
-        border-radius: 30px;
-        transition: all 0.3s ease;
-      }
-
-      .nav-link:hover,
-      .nav-link.active {
-        background: var(--primary-color);
-        color: #ffffff;
-      }
-
-      body.dark-mode .nav-link.active {
-        color: #1a202c;
-      }
-
-      /* ปุ่มสลับ Theme และ Language */
-      .lang-toggle {
-        position: fixed;
-        top: 20px;
-        right: 75px;
-        background: var(--card-bg);
-        color: var(--primary-color);
-        border: none;
-        border-radius: 50%;
-        width: 45px;
-        height: 45px;
-        font-size: 1rem;
-        font-weight: 600;
-        cursor: pointer;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
-        z-index: 1000;
-        font-family: "Prompt", sans-serif;
-      }
-      .lang-toggle:hover {
-        transform: scale(1.1);
-      }
-      body.dark-mode .lang-toggle {
-        color: var(--text-dark);
-      }
-
-      .theme-toggle {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: var(--card-bg);
-        color: var(--text-dark);
-        border: none;
-        border-radius: 50%;
-        width: 45px;
-        height: 45px;
-        font-size: 1.2rem;
-        cursor: pointer;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
-        z-index: 1000;
-      }
-      .theme-toggle:hover {
-        transform: scale(1.1);
-      }
-
-      /* --- แอนิเมชันตอนเลื่อนจอ (Scroll Reveal) --- */
-      .reveal {
-        opacity: 0;
-        transform: translateY(40px);
-        transition: all 0.8s ease-out;
-      }
-      .reveal.active {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      /* เคอร์เซอร์กะพริบสำหรับ Typing Effect */
-      .typing-cursor {
-        display: inline-block;
-        width: 3px;
-        height: 1.2em;
-        background-color: var(--primary-color);
-        vertical-align: middle;
-        animation: blink 0.8s step-end infinite;
-      }
-      @keyframes blink {
-        50% { opacity: 0; }
-      }
-
-      /* คลาสสำหรับซ่อน/โชว์ข้อความตามภาษาที่เลือก */
-      body.lang-th .text-en {
-        display: none !important;
-      }
-      body.lang-en .text-th {
-        display: none !important;
-      }
-
-      /* Responsive Design */
-      @media (max-width: 768px) {
-        .contact-container {
-          flex-direction: column;
-          gap: 2rem;
-        }
-      }
-      @media (max-width: 600px) {
-        .container {
-          padding: 1rem;
-        }
-        .section-card {
-          padding: 1.5rem;
-        }
-        .project-header {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 5px;
-        }
-        .nav-bar {
-          top: auto;
-          bottom: 20px;
-          width: 90%;
-          justify-content: space-around;
-          padding: 10px;
-          border-radius: 20px;
-        }
-        .nav-link {
-          font-size: 0.85rem;
-          padding: 8px 12px;
-        }
-      }
-    </style>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <nav class="nav-bar">
@@ -893,8 +241,8 @@
             target="_blank"
             rel="noopener noreferrer"
             class="project-link"
-            ><span class="text-th">ดูบน GitHub &rarr;</span>
-            <span class="text-en">View on GitHub &rarr;</span></a
+            ><span class="text-th">ดูบน GitHub →</span>
+            <span class="text-en">View on GitHub →</span></a
           >
         </div>
 
@@ -928,8 +276,8 @@
             target="_blank"
             rel="noopener noreferrer"
             class="project-link"
-            ><span class="text-th">ดูบน GitHub &rarr;</span>
-            <span class="text-en">View on GitHub &rarr;</span></a
+            ><span class="text-th">ดูบน GitHub →</span>
+            <span class="text-en">View on GitHub →</span></a
           >
         </div>
 
@@ -963,8 +311,8 @@
             target="_blank"
             rel="noopener noreferrer"
             class="project-link"
-            ><span class="text-th">ดูบน GitHub &rarr;</span>
-            <span class="text-en">View on GitHub &rarr;</span></a
+            ><span class="text-th">ดูบน GitHub →</span>
+            <span class="text-en">View on GitHub →</span></a
           >
         </div>
       </section>
@@ -985,38 +333,15 @@
               >
             </p>
 
-            <div
-              id="form-success"
-              style="
-                color: #48bb78;
-                font-weight: 500;
-                margin-bottom: 15px;
-                padding: 10px;
-                background: rgba(72, 187, 120, 0.1);
-                border-radius: 8px;
-                display: none;
-              "
-            >
+            <div id="form-success" class="form-alert form-success">
               <i class="fa-solid fa-circle-check"></i
-              >&nbsp;<span class="text-th">ขอบคุณ! ข้อความของคุณถูกส่งแล้ว</span>
-              <span class="text-en"
-                >Thank you! Your message has been sent.</span
-              >
+              > <span class="text-th">ขอบคุณ! ข้อความของคุณถูกส่งแล้ว</span>
+              <span class="text-en">Thank you! Your message has been sent.</span>
             </div>
 
-            <div
-              id="form-error"
-              style="
-                color: #f56565;
-                font-weight: 500;
-                margin-bottom: 15px;
-                display: none;
-              "
-            >
+            <div id="form-error" class="form-alert form-error">
               <span class="text-th">โอ๊ะ! เกิดปัญหาในการส่งฟอร์มของคุณ</span>
-              <span class="text-en"
-                >Oops! There was a problem submitting your form.</span
-              >
+              <span class="text-en">Oops! There was a problem submitting your form.</span>
             </div>
 
             <form
@@ -1027,12 +352,7 @@
             >
               <input type="text" name="name" placeholder="Name" required />
               <input type="email" name="email" placeholder="Email" required />
-              <input
-                type="text"
-                name="message"
-                placeholder="Message"
-                required
-              />
+              <input type="text" name="message" placeholder="Message" required />
               <button type="submit" id="submit-btn" class="btn-send">
                 <span class="text-th">ส่งข้อความ</span>
                 <span class="text-en">SEND</span>
@@ -1045,57 +365,27 @@
             <ul class="info-list">
               <li>
                 <i class="fa-solid fa-envelope info-icon"></i>
-                <a
-                  href="mailto:ter212548@gmail.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >Email</a
-                >
+                <a href="mailto:ter212548@gmail.com" target="_blank" rel="noopener noreferrer">Email</a>
               </li>
               <li>
                 <i class="fa-solid fa-phone info-icon"></i>
-                <a
-                  href="tel:0948488606"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >Phone</a
-                >
+                <a href="tel:0948488606" target="_blank" rel="noopener noreferrer">Phone</a>
               </li>
               <li>
                 <i class="fa-brands fa-facebook info-icon"></i>
-                <a
-                  href="https://www.facebook.com/share/1BRm7k5rb6/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >Facebook</a
-                >
+                <a href="https://www.facebook.com/share/1BRm7k5rb6/" target="_blank" rel="noopener noreferrer">Facebook</a>
               </li>
               <li>
                 <i class="fa-brands fa-instagram info-icon"></i>
-                <a
-                  href="https://www.instagram.com/copter21_?igsh=MTI3NXA3bzlvbmFqZw=="
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >Instagram</a
-                >
+                <a href="https://www.instagram.com/copter21_?igsh=MTI3NXA3bzlvbmFqZw==" target="_blank" rel="noopener noreferrer">Instagram</a>
               </li>
               <li>
                 <i class="fa-brands fa-line info-icon"></i>
-                <a
-                  href="https://line.me/ti/p/6EZuWmLXjZ"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >Line</a
-                >
+                <a href="https://line.me/ti/p/6EZuWmLXjZ" target="_blank" rel="noopener noreferrer">Line</a>
               </li>
               <li>
                 <i class="fa-brands fa-github info-icon"></i>
-                <a
-                  href="https://github.com/COPTER-11"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >github.com/COPTER-11</a
-                >
+                <a href="https://github.com/COPTER-11" target="_blank" rel="noopener noreferrer">github.com/COPTER-11</a>
               </li>
               <li>
                 <i class="fa-solid fa-clock info-icon"></i>
@@ -1103,10 +393,7 @@
               </li>
               <li>
                 <i class="fa-solid fa-house info-icon"></i>
-                <a
-                  href="https://maps.app.goo.gl/znomLfb7mrY9EMEs6"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <a href="https://maps.app.goo.gl/znomLfb7mrY9EMEs6" target="_blank" rel="noopener noreferrer"
                   ><span class="text-th">กรุงเทพมหานคร, ประเทศไทย</span>
                   <span class="text-en">Bangkok, Thailand</span></a
                 >
@@ -1134,194 +421,6 @@
       />
     </div>
 
-    <script>
-      // 1. ระบบตั้งค่าเริ่มต้นให้เว็บเป็นภาษาไทย
-      document.body.classList.add("lang-th"); // เปลี่ยนจาก lang-en เป็น lang-th เพื่อให้ตรงกับปุ่ม "EN"
-
-      // 2. ระบบไฮไลต์ Tab Bar ตามการเลื่อนหน้าจอตรงกลาง
-      const sections = document.querySelectorAll("section[id], .container[id]");
-      const navLinks = document.querySelectorAll(".nav-link");
-
-      window.addEventListener("scroll", () => {
-        let current = "";
-        sections.forEach((section) => {
-          const sectionTop = section.offsetTop;
-          if (window.scrollY + window.innerHeight / 2 >= sectionTop) {
-            current = section.getAttribute("id");
-          }
-        });
-
-        navLinks.forEach((link) => {
-          link.classList.remove("active");
-          if (link.getAttribute("href").includes(current)) {
-            link.classList.add("active");
-          }
-        });
-      });
-
-      // 3. ระบบเปลี่ยนการเลื่อนหน้าจอให้อยู่กึ่งกลาง
-      document.querySelectorAll(".nav-link").forEach((link) => {
-        link.addEventListener("click", function (e) {
-          const targetHref = this.getAttribute("href");
-          if (targetHref.startsWith("#")) {
-            e.preventDefault();
-            const targetId = targetHref.substring(1);
-            const targetElement = document.getElementById(targetId);
-            if (targetElement) {
-              targetElement.scrollIntoView({
-                behavior: "smooth",
-                block: "center",
-              });
-            }
-          }
-        });
-      });
-
-      // 4. ระบบเปลี่ยนธีม (Dark Mode)
-      function toggleTheme() {
-        document.body.classList.toggle("dark-mode");
-        const btn = document.getElementById("themeBtn");
-        if (document.body.classList.contains("dark-mode")) {
-          btn.innerText = "☀️";
-        } else {
-          btn.innerText = "🌙";
-        }
-      }
-
-      // 5. ระบบสลับภาษา
-      function toggleLanguage() {
-        const body = document.body;
-        const langBtn = document.getElementById("langBtn");
-
-        if (body.classList.contains("lang-th")) {
-          body.classList.remove("lang-th");
-          body.classList.add("lang-en");
-          langBtn.innerText = "TH";
-        } else {
-          body.classList.remove("lang-en");
-          body.classList.add("lang-th");
-          langBtn.innerText = "EN";
-        }
-      }
-
-      // 6. เอฟเฟกต์พิมพ์ดีด
-      const textArray = [
-        "Student Developer",
-        "Frontend Enthusiast",
-        "UI/UX Designer",
-      ];
-      let textIndex = 0;
-      let charIndex = 0;
-      let isDeleting = false;
-      const typeSpeed = 100;
-      const deleteSpeed = 50;
-      const delayBetweenWords = 2000;
-
-      function typeWriter() {
-        const currentText = textArray[textIndex];
-        let displayString = currentText.substring(0, charIndex);
-        document.getElementById("typewriter").innerText = displayString;
-
-        if (!isDeleting && charIndex < currentText.length) {
-          charIndex++;
-          setTimeout(typeWriter, typeSpeed);
-        } else if (isDeleting && charIndex > 0) {
-          charIndex--;
-          setTimeout(typeWriter, deleteSpeed);
-        } else {
-          isDeleting = !isDeleting;
-          if (!isDeleting) {
-            textIndex = (textIndex + 1) % textArray.length;
-          }
-          setTimeout(typeWriter, isDeleting ? delayBetweenWords : 500);
-        }
-      }
-
-      document.addEventListener("DOMContentLoaded", function () {
-        typeWriter();
-      });
-
-      // 7. แอนิเมชันเลื่อนจอ (Scroll Reveal)
-      function revealElement() {
-        var reveals = document.querySelectorAll(".reveal");
-        for (var i = 0; i < reveals.length; i++) {
-          var windowHeight = window.innerHeight;
-          var elementTop = reveals[i].getBoundingClientRect().top;
-          var elementVisible = 100;
-          if (elementTop < windowHeight - elementVisible) {
-            reveals[i].classList.add("active");
-          }
-        }
-      }
-      window.addEventListener("scroll", revealElement);
-      revealElement();
-
-      // 8. ระบบเปิด-ปิด Popup รูป Resume
-      function openResume() {
-        document.getElementById("resumeModal").style.display = "block";
-      }
-
-      const resumeImg = document.getElementById("resumeImg");
-      resumeImg.addEventListener("click", function (event) {
-        event.stopPropagation();
-        this.classList.toggle("zoomed");
-      });
-
-      function closeResume() {
-        document.getElementById("resumeModal").style.display = "none";
-        resumeImg.classList.remove("zoomed");
-      }
-
-      window.onclick = function (event) {
-        var modal = document.getElementById("resumeModal");
-        if (event.target == modal) {
-          modal.style.display = "none";
-          resumeImg.classList.remove("zoomed");
-        }
-      };
-    </script>
-
-    <script>
-      const form = document.getElementById("portfolio-form");
-      const successMsg = document.getElementById("form-success");
-      const errorMsg = document.getElementById("form-error");
-      const submitBtn = document.getElementById("submit-btn");
-
-      form.addEventListener("submit", async function (event) {
-        event.preventDefault(); 
-
-        // เปลี่ยนสถานะปุ่มตอนกำลังรอส่ง (รองรับ 2 ภาษา)
-        submitBtn.innerHTML = '<span class="text-th">กำลังส่ง...</span><span class="text-en">SENDING...</span>';
-        submitBtn.disabled = true;
-        successMsg.style.display = "none";
-        errorMsg.style.display = "none";
-
-        const data = new FormData(event.target);
-
-        fetch(event.target.action, {
-          method: form.method,
-          body: data,
-          headers: {
-            Accept: "application/json",
-          },
-        })
-          .then((response) => {
-            if (response.ok) {
-              successMsg.style.display = "block"; 
-              form.reset(); 
-            } else {
-              errorMsg.style.display = "block"; 
-            }
-            // คืนสถานะปุ่มกลับมาเหมือนเดิม
-            submitBtn.innerHTML = '<span class="text-th">ส่งข้อความ</span><span class="text-en">SEND</span>';
-            submitBtn.disabled = false;
-          })
-          .catch((error) => {
-            errorMsg.style.display = "block";
-            submitBtn.innerHTML = '<span class="text-th">ส่งข้อความ</span><span class="text-en">SEND</span>';
-            submitBtn.disabled = false;
-          });
-      });
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>
